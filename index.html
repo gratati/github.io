@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио - Разработчик & Музыкальный продюсер</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #1e293b;
+            --light: #f1f5f9;
+            --text: #334155;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Герой секция */
+        .hero {
+            padding: 150px 0 100px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 5s ease infinite;
+            background-size: 200% auto;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--light);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Секции */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+            color: var(--light);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Проекты */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            color: var(--light);
+            margin-bottom: 5px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .tech-tag {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .project-link {
+            color: var(--light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            color: var(--primary);
+        }
+
+        /* Музыка */
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .music-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .music-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .music-preview {
+            position: relative;
+            height: 180px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(236, 72, 153, 0.3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-button {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .play-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .play-button i {
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .music-info {
+            padding: 20px;
+        }
+
+        .music-title {
+            font-size: 1.3rem;
+            color: var(--light);
+            margin-bottom: 8px;
+        }
+
+        .music-description {
+            color: #94a3b8;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .music-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .music-link:hover {
+            gap: 12px;
+        }
+
+        /* Аудио панель */
+        .audio-controls {
+            margin: 15px 0 10px;
+        }
+
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .progress-bar::-webkit-slider-thumb {
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0 15px;
+        }
+
+        .volume-bar {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-bar::-webkit-slider-thumb {
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(236, 72, 153, 0.5);
+        }
+
+        /* Контакты */
+        .contact {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact p {
+            color: var(--light);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #64748b;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 50px;
+        }
+
+        /* Фильтры */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+            padding: 10px 0;
+        }
+
+        .filter-btn {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--light);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Подсветка кода */
+        code {
+            background: rgba(236, 72, 153, 0.2);
+            color: #ec4899;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            border: 1px solid rgba(236, 72, 153, 0.3);
+        }
+
+        pre {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            white-space: pre-wrap;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        pre code {
+            background: none;
+            color: #a5b4fc;
+            padding: 0;
+            border: none;
+            font-size: 0.95em;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .projects-grid, .music-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">DevMusic</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#projects">Проекты</a></li>
+                    <li><a href="#music">Музыка</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Герой -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Разработка & Музыкальное искусство</h1>
+            <p>Создаю инновационные цифровые решения и экспериментирую с AI-генерацией музыки</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">Мои проекты</a>
+                <a href="#music" class="btn btn-secondary">Музыкальные работы</a>
+            </div>
+        </div>
+    </section>
+
+<!-- Проекты -->
+<section id="projects">
+    <div class="container">
+        <h2 class="section-title">Проекты на GitHub</h2>
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Все</button>
+            <button class="filter-btn" data-filter="python">Python</button>
+            <button class="filter-btn" data-filter="nlp">NLP</button>
+            <button class="filter-btn" data-filter="flutter">Flutter</button>
+            <button class="filter-btn" data-filter="flask">Flask</button>
+            <button class="filter-btn" data-filter="streamlit">Streamlit</button>
+        </div>
+        <div class="projects-grid">
+            <!-- TextEaseBot -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <h3 class="project-title">TextEaseBot</h3>
+                        <p>Telegram-бот, который помогает сделать сложные тексты понятными</p>
+                    </div>
+                </div>
+                <p>Telegram-бот поддерживает упрощение, перевод на английский, анализ через режим <code>"фактчекинг"</code> и работу с файлами.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">python-telegram-bot</span>
+                    <span class="tech-tag">transformers</span>
+                    <span class="tech-tag">NLP</span>
+                    <span class="tech-tag">torch</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/gratati/TextEaseBot" class="project-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="/docs/texteasebot.pdf" class="project-link" target="_blank">
+                        <i class="fas fa-file-pdf"></i> Демо (PDF)
+                    </a>
+                </div>
+            </div>
+
+            <!-- cv-segmentation-sam-unet -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h3 class="project-title">cv-segmentation-sam-unet</h3>
+                        <p>Веб-интерфейс для CV-сегментации игрового поля с помощью SAM и U-Net</p>
+                    </div>
+                </div>
+                <p>Автоматическая сегментация площадки на спортивных видео с использованием передовых моделей компьютерного зрения: SAM (Segment Anything Model) и U-Net.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">TensorFlow/numpy</span>
+                    <span class="tech-tag">OpenCV</span>
+                    <span class="tech-tag">segment-anything</span>
+                    <span class="tech-tag">flask</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/gratati/cv-segmentation-sam-unet" class="project-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="/docs/cv_segmentation_sam_unet.pdf" class="project-link" target="_blank">
+                        <i class="fas fa-file-pdf"></i> Демо (PDF)
+                    </a>
+                </div>
+            </div>
+
+            <!-- sentiment-analyzer -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div>
+                        <h3 class="project-title">sentiment-analyzer</h3>
+                        <p>Веб-интерфейс на базе Streamlit для анализа тональности текста</p>
+                    </div>
+                </div>
+                <p>Система использует нейросетевые модели для определения эмоциональной окраски введённого текста (позитивная, негативная, нейтральная).</p>
+                <div class="project-tech">
+                    <span class="tech-tag">BERT</span>
+                    <span class="tech-tag">KMeans</span>
+                    <span class="tech-tag">Streamlit</span>
+                    <span class="tech-tag">Scikit-learn</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/gratati/sentiment-analyzer" class="project-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="/docs/анализ тональности.pdf" class="project-link" target="_blank">
+                        <i class="fas fa-file-pdf"></i> Демо (PDF)
+                    </a>
+                </div>
+            </div>
+
+            <!-- realtime_object -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="project-title">realtime_object</h3>
+                        <p>Приложение для Android для детекции объектов в реальном времени</p>
+                    </div>
+                </div>
+                <p>Приложение использует модель TensorFlow Lite для распознавания объектов через камеру в реальном времени и при обработке видео из галереи. Поддерживает экспорт результатов и работу без интернета.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Flutter</span>
+                    <span class="tech-tag">TensorFlow Lite</span>
+                    <span class="tech-tag">Firebase</span>
+                    <span class="tech-tag">ML Kit</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/gratati/realtime_object" class="project-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="/docs/object-detection.pdf" class="project-link" target="_blank">
+                        <i class="fas fa-file-pdf"></i> Демо (PDF)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Музыкальные примеры -->
+<section id="music">
+    <div class="container">
+        <h2 class="section-title">Музыкальные эксперименты с Producer.ai</h2>
+        <div class="music-grid">
+            <!-- Трек 1: Mystica -->
+            <div class="music-card">
+                <div class="music-preview">
+                    <img src="music/Mystica.png" alt="Mystica">
+                    <button class="play-button" onclick="togglePlay('mystica', 'music/audio/Mystica.mp3')">
+                        <i class="fas fa-play" id="play-icon-mystica"></i>
+                    </button>
+                </div>
+                <div class="music-info">
+                    <h3 class="music-title">Mystica</h3>
+                    <p class="music-description">
+                        <strong>Звук:</strong> Dynamic Ritual Ambient – hang drums, Tibetan bowls, whisper vocals, rhythmic ASMR, swelling bass pulses, dynamic tempo shifts, storm textures, chime swells, cinematic ambient synths
+                    </p>
+
+                    <pre class="track-structure">
+Intro, Thunder roll texture, Low sub pad, Whispered build
+(Whispers scattered: “Listen… above… below…”)
+Hang drum enters with tension — syncopated, distant
+Tibetan bowls shimmer with light distortion, wind swelling underneath
+
+Verse, Breathing rhythm rises, Percussion intensifies, Echoed mantra fragments
+(Whispers left/right: “Awaken… awaken…”)
+Handpan patterns become assertive, slow tribal pulse beneath
+Synth pads bend and twist around bell patterns, layered clicks emerge
+
+Chorus, Surge of motion, Harmonic swirl, Whisper chorus
+(ASMR chant rises: “Breathe the fire… hold the storm…”)
+Hang drum becomes melodic-rhythmic, sidechained to a cinematic kick layer
+Tibetan bowls oscillate with modulated delay, pads swell upward
+
+Bridge, Drop to silence, Cold shimmer textures, Reverse breath loop
+(Whispers in reverb tail: “Fall… fall into the sound…”)
+[All drums vanish, thin glacial pad floats, bell strike echoes miles away]
+
+Break, Fast breath loop, Whisper incantation, Percussive rebuild
+(Ritual phrases layered: “Rhythm… roots… return…”)
+Hang drums and bowls rise again, now in polyrhythmic patterns
+Synths burst with spark textures, ASMR panning like a circle dance
+
+Outro, Collapse into stillness, Final low gong, Whisper trail
+(Last voice fading: “...through you...”)
+Pad decays into low sub hum, bell fades into infinity
+(Silence)
+                    </pre>
+
+                    <div class="audio-controls">
+                        <div class="time-info">
+                            <span class="current-time">0:00</span> / <span class="duration">0:00</span>
+                        </div>
+                        <input type="range" class="progress-bar" value="0" min="0" max="100" step="1">
+                    </div>
+
+                    <div class="volume-control">
+                        <i class="fas fa-volume-down"></i>
+                        <input type="range" class="volume-bar" min="0" max="1" value="1" step="0.01">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+
+                    <a href="https://www.producer.ai/song/b3f461f5-7332-42db-a22c-8860e5617e92" target="_blank" rel="noopener noreferrer" class="music-link">
+                        Слушать на Producer.ai <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Трек 2: Mysterious Tide -->
+            <div class="music-card">
+                <div class="music-preview">
+                    <img src="music/Mysterious Tide.png" alt="Mysterious Tide">
+                    <button class="play-button" onclick="togglePlay('mysterious-tide', 'music/audio/Mysterious Tide.mp3')">
+                        <i class="fas fa-play" id="play-icon-mysterious-tide"></i>
+                    </button>
+                </div>
+                <div class="music-info">
+                    <h3 class="music-title">Mysterious Tide</h3>
+                    <p class="music-description">
+                        <strong>Звук:</strong> Trip-hop, chillout, Hawaiian lap steel guitar, ambient synth pads, indigenous percussion, slow-motion textures, vinyl crackle, deep sub-bass, organic reverb
+                    </p>
+
+                    <pre class="track-structure">
+Prompt:
+A serene and harmonious chillout track that captures the soul of a lazy tropical afternoon. At its heart, the song features the expressive slide and shimmer of a Hawaiian lap steel guitar, gently flowing in dreamy, reverberated melodies. The rhythm is anchored by a fusion of indigenous percussion instruments—deep, mellow pahu drums with their earthy resonance; soft, syncopated beats from hand-played congas; and shimmering accents from bamboo wind chimes and oceanic shells. The tempo glides slowly at 75–80 BPM, conjuring an unhurried, introspective mood. Ambient synth pads, resembling sea mist and warm sunlight, stretch across the stereo field, subtly shifting and evolving like the tide. Occasional soft bird calls and breeze-like whooshes are woven into the atmosphere, enhancing the sense of place. The harmonic palette is rich with major 7th and 9th chords, creating emotional warmth and a sense of open space. This composition invites the listener into a tranquil escape—a sonic hammock suspended between sky and sea.
+
+Sound:
+trip-hop, chillout, Hawaiian lap steel guitar, ambient synth pads, indigenous percussion
+Model:
+FUZZ-1.1
+Lyrics:
+Instrumental
+                    </pre>
+
+                    <div class="audio-controls">
+                        <div class="time-info">
+                            <span class="current-time">0:00</span> / <span class="duration">0:00</span>
+                        </div>
+                        <input type="range" class="progress-bar" value="0" min="0" max="100" step="1">
+                    </div>
+
+                    <div class="volume-control">
+                        <i class="fas fa-volume-down"></i>
+                        <input type="range" class="volume-bar" min="0" max="1" value="1" step="0.01">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+
+                    <a href="https://www.producer.ai/song/aa0799a3-70eb-4f51-8869-25cae81016fa" target="_blank" rel="noopener noreferrer" class="music-link">
+                        Слушать на Producer.ai <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Трек 3: Flight of Life -->
+            <div class="music-card">
+                <div class="music-preview">
+                    <img src="music/Flight of Life.png" alt="Flight of Life">
+                    <button class="play-button" onclick="togglePlay('flight-of-life', 'music/audio/Flight of Life.mp3')">
+                        <i class="fas fa-play" id="play-icon-flight-of-life"></i>
+                    </button>
+                </div>
+                <div class="music-info">
+                    <h3 class="music-title">Flight of Life</h3>
+                    <p class="music-description">
+                        <strong>Звук:</strong> Psychedelic Rock, Space Rock, Blues, 1979, trippy, Acid Rock, swirling organ, distorted guitar solos, echo-drenched vocals, vintage tape delay
+                    </p>
+
+                    <pre class="track-structure">
+Lyrics:
+Intro 
+Standing at the edge of something greater
+Than I've ever known before
+
+Verse 1
+Looking at the mountain in the distance
+Second-guessing every step I take
+People say I should just play it safer
+But there's something in me wide awake
+My hands are trembling, heart is racing
+As I plan to leave it all behind
+(Leave it all behind)
+
+Pre-chorus
+Every voice that said "impossible"
+Every doubt that held me down
+Now becomes the fuel that lights the fire
+As I wear my courage like a crown
+
+Chorus
+I'm brave enough to fall
+Brave enough to risk it all
+Even if I hit the ground
+I'll rise and stand up tall
+'Cause I'm brave enough to fall
+
+Verse 2
+Yesterday I watched the sunrise breaking
+Through the clouds that kept me in the dark
+Now I see the path that I've been making
+Leading to a brand new start
+My fear's not gone, but I'm not waiting
+For permission to begin my flight
+
+Pre-chorus
+Every step into uncertainty
+Teaches me to trust my wings
+All those walls I built around me
+Crumbling as my spirit sings
+
+Chorus
+I'm brave enough to fall
+Brave enough to risk it all
+Even if I hit the ground
+I'll rise and stand up tall
+'Cause I'm brave enough to fall
+
+Bridge
+The strength was always there
+Hidden in my heart
+Now I understand that falling
+Is just where flying starts
+
+Chorus
+I'm brave enough to fall
+(Brave enough, brave enough)
+Brave enough to risk it all
+Even if I hit the ground
+I'll rise and stand up tall
+'Cause I'm brave enough to fall
+                    </pre>
+
+                    <div class="audio-controls">
+                        <div class="time-info">
+                            <span class="current-time">0:00</span> / <span class="duration">0:00</span>
+                        </div>
+                        <input type="range" class="progress-bar" value="0" min="0" max="100" step="1">
+                    </div>
+
+                    <div class="volume-control">
+                        <i class="fas fa-volume-down"></i>
+                        <input type="range" class="volume-bar" min="0" max="1" value="1" step="0.01">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+
+                    <a href="https://www.producer.ai/song/c4a09c33-e4b2-4497-bee7-b6af731ed0e2" target="_blank" rel="noopener noreferrer" class="music-link">
+                        Слушать на Producer.ai <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Трек 4: Dance Queen -->
+            <div class="music-card">
+                <div class="music-preview">
+                    <img src="music/Dance Queen.png" alt="Dance Queen">
+                    <button class="play-button" onclick="togglePlay('dance-queen', 'music/audio/Dance Queen.mp3')">
+                        <i class="fas fa-play" id="play-icon-dance-queen"></i>
+                    </button>
+                </div>
+                <div class="music-info">
+                    <h3 class="music-title">Dance Queen</h3>
+                    <p class="music-description">
+                        <strong>Звук:</strong> Urban beats, Warm piano chords, Energetic anthem, driving rhythm, vocal chops, synth stabs, sidechained compression, club-ready dynamics
+                    </p>
+
+                    <pre class="track-structure">
+[Текст песни Dance Queen отсутствует в данных]
+                    </pre>
+
+                    <div class="audio-controls">
+                        <div class="time-info">
+                            <span class="current-time">0:00</span> / <span class="duration">0:00</span>
+                        </div>
+                        <input type="range" class="progress-bar" value="0" min="0" max="100" step="1">
+                    </div>
+
+                    <div class="volume-control">
+                        <i class="fas fa-volume-down"></i>
+                        <input type="range" class="volume-bar" min="0" max="1" value="1" step="0.01">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+
+                    <a href="https://www.producer.ai/song/57e9dc98-7ebd-41f9-98a6-48a80f5cc363" target="_blank" rel="noopener noreferrer" class="music-link">
+                        Слушать на Producer.ai <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Контакты -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Свяжитесь со мной</h2>
+            <div class="contact">
+                <p>Интересует сотрудничество? Хотите обсудить проекты или музыкальные эксперименты?</p>
+                <div class="social-links">
+                    <a href="https://github.com/gratati" class="social-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    
+                    <a href="https://t.me/mentvork" class="social-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="mailto:gratati49@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Gratati. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Скрытый аудио -->
+    <audio id="preview-audio" preload="none"></audio>
+
+    <!-- Скрипты -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    let currentPlayingButton = null;
+    const audio = document.getElementById('preview-audio');
+
+    // Находим все элементы управления (для всех карточек)
+    const allCurrentTimeEls = document.querySelectorAll('.current-time');
+    const allDurationEls = document.querySelectorAll('.duration');
+    const allProgressBars = document.querySelectorAll('.progress-bar');
+    const allVolumeBars = document.querySelectorAll('.volume-bar');
+
+    if (!audio) {
+        console.error('Аудио-элемент не найден');
+        return;
+    }
+
+    // Установка громкости по умолчанию
+    audio.volume = 1;
+
+    // Обновляем элементы для каждого трека
+    allVolumeBars.forEach(volumeBar => {
+        volumeBar.addEventListener('input', () => {
+            audio.volume = volumeBar.value;
+        });
+    });
+
+    allProgressBars.forEach(progressBar => {
+        progressBar.addEventListener('input', () => {
+            if (audio.duration) {
+                const seekTime = audio.duration * (progressBar.value / 100);
+                audio.currentTime = seekTime;
+            }
+        });
+    });
+
+    // Обновление прогресса и времени при воспроизведении
+    audio.addEventListener('timeupdate', () => {
+        if (audio.duration) {
+            const currentTime = audio.currentTime;
+            const duration = audio.duration;
+
+            // Обновляем ВСЕ элементы (на случай, если их несколько)
+            allCurrentTimeEls.forEach(el => {
+                el.textContent = formatTime(currentTime);
+            });
+
+            allDurationEls.forEach(el => {
+                el.textContent = formatTime(duration);
+            });
+
+            allProgressBars.forEach(bar => {
+                bar.value = (currentTime / duration) * 100;
+            });
+        }
+    });
+
+    // Когда метаданные загружены (важно!)
+    audio.addEventListener('loadedmetadata', () => {
+        allDurationEls.forEach(el => {
+            el.textContent = formatTime(audio.duration);
+        });
+    });
+
+    // Формат времени: 2:05 вместо 125
+    function formatTime(seconds) {
+        seconds = Math.floor(seconds || 0);
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Функция переключения воспроизведения
+    window.togglePlay = function(id, src) {
+        const icon = document.getElementById(`play-icon-${id}`);
+
+        if (!icon) {
+            console.error(`Иконка play-icon-${id} не найдена`);
+            return;
+        }
+
+        // Если кликнули на тот же трек
+        if (currentPlayingButton === id) {
+            if (audio.paused) {
+                audio.play().catch(e => console.error("Ошибка воспроизведения:", e));
+                icon.classList.replace('fa-play', 'fa-pause');
+            } else {
+                audio.pause();
+                icon.classList.replace('fa-pause', 'fa-play');
+            }
+        } else {
+            // Новый трек
+            audio.src = src;
+            audio.load(); // Загружаем метаданные
+
+            audio.play().catch(e => console.error("Ошибка воспроизведения:", e));
+            icon.classList.replace('fa-play', 'fa-pause');
+
+            // Сброс предыдущей иконки
+            if (currentPlayingButton) {
+                const prevIcon = document.getElementById(`play-icon-${currentPlayingButton}`);
+                if (prevIcon) {
+                    prevIcon.classList.replace('fa-pause', 'fa-play');
+                }
+            }
+
+            currentPlayingButton = id;
+        }
+
+        // Сброс при окончании
+        audio.onended = () => {
+            icon.classList.replace('fa-pause', 'fa-play');
+            currentPlayingButton = null;
+
+            // Сброс прогресса
+            allProgressBars.forEach(bar => bar.value = 0);
+            allCurrentTimeEls.forEach(el => el.textContent = '0:00');
+        };
+    };
+
+    // Анимация появления карточек
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                entry.target.style.transitionDelay = `${index * 100}ms`;
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+
+    document.querySelectorAll('.project-card, .music-card').forEach((card, index) => {
+        card.style.transitionDelay = '0ms';
+        observer.observe(card);
+    });
+
+    // Фильтрация проектов
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.dataset.filter;
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            projectCards.forEach(card => {
+                const techTags = Array.from(card.querySelectorAll('.tech-tag'))
+                    .map(tag => tag.textContent.toLowerCase());
+                const matches = techTags.some(tag => tag.includes(filter));
+                card.style.display = (filter === 'all' || matches) ? 'block' : 'none';
+            });
+
+            // Перезапуск анимации
+            setTimeout(() => {
+                projectCards.forEach(card => {
+                    if (card.style.display !== 'none') {
+                        card.style.opacity = 0;
+                        card.style.transform = 'translateY(30px)';
+                        observer.unobserve(card);
+                        observer.observe(card);
+                    }
+                });
+            }, 100);
+        });
+    });
+});
+</script>
+</body>
+</html>
